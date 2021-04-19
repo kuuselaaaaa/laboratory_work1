@@ -1,0 +1,14 @@
+os: linux
+dist: bionic 
+
+language: 
+    - c
+    
+script:
+    - qmake
+    - make
+    - ./tests/tests
+    
+notification:
+    email: false
+
