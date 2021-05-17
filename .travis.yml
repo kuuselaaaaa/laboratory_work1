@@ -2,10 +2,10 @@ os: linux
 dist: bionic 
 
 language: 
-    - c
+  - c
 
 before_install:
-    - pip install --user cpp-coveralls
+  - pip install --user cpp-coveralls
     
 addons:
   sonarcloud:
@@ -13,15 +13,20 @@ addons:
     token: $SONAR
     
 script:
-    - qmake
-    - make
-    - ./tests/tests
+  - qmake
+  - make
+  - ./tests/tests
     
 after_success:
-    - coveralls --root . -E ".*external.*" -E ".*tests.*"    
-    - build-wrapper-linux-x86-64 --out-dir bw-output make clean all
-    - sonar-scanner
+  - coveralls --root . -E ".*external.*" -E ".*tests.*"    
+  - build-wrapper-linux-x86-64 --out-dir bw-output make clean all
+  - sonar-scanner
     
+cache:
+  directories:
+  - '$HOME/.m2/repository'
+  - '$HOME/.sonar/cache'
+
 notification:
-    email: false
+  email: false
 
