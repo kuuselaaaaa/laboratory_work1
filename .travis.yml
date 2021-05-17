@@ -3,11 +3,17 @@ dist: bionic
 
 language: 
     - c
+
+before_install:
+    - pip install --user cpp-coveralls
     
 script:
     - qmake
     - make
     - ./tests/tests
+    
+after_success:
+    - coveralls --root . -E ".*external.*" -E ".*tests.*"    
     
 notification:
     email: false
